@@ -32,7 +32,7 @@ function inputForm(){
 		score=-1;
 		// totalScore.innerHTML=0;
 	}
-	if(input.value===word.innerHTML && time!==0)
+	if(input.value.toLowerCase()===word.innerHTML && time!==0)
 	{
 		gameover.style.display='none';
 		score++;
@@ -61,7 +61,7 @@ function timeFunc(){
 			console.log(score);
 		}
 		if(f==0){
-			txt_value=input.value;
+			txt_value=input.value.toLowerCase();
 		f=1;
 		}
 		error.innerHTML=`Last entered value is "<span style="color:red">${txt_value}</span>"`;
