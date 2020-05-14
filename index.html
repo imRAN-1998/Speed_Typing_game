@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Word Beater</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+<header>
+	<h1>Word Beater</h1>
+</header>
+<div class="container">
+	<h4 class="fChild">Type the BELOW word within <span class="blue">5</span> seconds</h4>
+	<h1 id="data-words"></h1>
+	<form id="myform">
+		<input type="text" name="data" id="data" placeholder="Type here.....">
+	</form>
+	<div> <h4 class="over">Gameover my child!!!</h4></div>
+	<div><h4 class="error"></h4></div>
+	<div class="time-score">
+	<div>Timeout: <span id="timeout">5</span></div>
+	<div>Score: <span id="score">0</span></div>
+	</div>
+	<div class="instruction">
+		<h4>Instructions</h4>
+		<p>Type each word in a given amount of time to <span class="blue">score</span>. To play again, type the current word and the score will reset(The entered current word won't be counted) orelse reload the page</p>
+	</div>
+</div>
+<script type="text/javascript" src="script.js"></script>
+</body>
+</html>
