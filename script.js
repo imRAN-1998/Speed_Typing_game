@@ -9,6 +9,7 @@ let time=5;
 let isplaying;
 let f=0;
 let txt_value='';
+let i;
 
 document.addEventListener('DOMContentLoaded',load);
 
@@ -39,6 +40,7 @@ function inputForm(){
 		time=6;
 		word.innerHTML=words[Math.floor(Math.random()* words.length)];
 		input.value='';
+		isplaying=true;
 		totalScore.innerHTML=score;
 		f=0;
 	}
@@ -58,7 +60,24 @@ function timeFunc(){
 		isplaying=false;
 		if(score!=-1)
 		{
-			console.log(score);
+			if(localStorage.getItem('scores')===null)
+			{
+				i=1;
+			}
+			else{
+				console.log('here');
+				const temp = JSON.parse(localStorage.getItem('scores'));
+				console.log(temp);
+				if(!temp.length){
+					i=1;
+				}
+				else{
+				i=parseInt(temp[temp.length-1].id)+1;
+				}
+			}
+			const p = new Score(score,i);
+			List.addScore(p);
+			UI.addData(p);
 		}
 		if(f==0){
 			txt_value=input.value.toLowerCase();
@@ -73,6 +92,76 @@ function checking(){
 		timeout.innerHTML=0;
 	}
 }
+
+class Score{
+	constructor(score,id){
+		this.score=parseInt(score);
+		this.id=id;
+	}
+}
+class List{
+	static getScore(){
+		let scores;
+		if(localStorage.getItem('scores')==null)
+		{
+			scores = [];
+		}
+		else{
+			scores = JSON.parse(localStorage.getItem('scores'));
+
+		}
+		return scores;
+	}
+	static addScore(score){
+		const scores=List.getScore();
+		scores.push(score);
+		localStorage.setItem('scores',JSON.stringify(scores));
+	}
+	static removeScore(id1){
+		// console.log()
+		const scores=List.getScore();
+		scores.forEach(function(score,index){
+			if(score.id===id1){
+				scores.splice(index,1);
+			}
+		})
+		localStorage.setItem('scores',JSON.stringify(scores));
+	}
+}
+let btn_x;
+document.querySelector('.table-data').addEventListener('click',function(e){
+	if(e.target.classList=='red'){
+		btn_x=e.target.parentElement.previousElementSibling.previousElementSibling.textContent;
+		e.target.parentElement.parentElement.remove();
+		console.log(btn_x);
+		List.removeScore(parseInt(btn_x));
+	}
+	
+})
+
+class UI{
+	static addData(score1){
+		const tbody=document.querySelector('.table-data');
+		const tr=document.createElement('tr');
+		const td1=document.createElement('td');
+		td1.innerText=score1.id;
+		const td2=document.createElement('td');
+		td2.innerText=score1.score;
+		const td3=document.createElement('td');
+		td3.innerHTML='<button class="red">x</button>';
+		tr.appendChild(td1);
+		tr.appendChild(td2);
+		tr.appendChild(td3);
+		tbody.appendChild(tr);
+	}
+}
+document.addEventListener('DOMContentLoaded',function(){
+	const output=List.getScore();
+	output.forEach(function(o){
+		UI.addData(o);
+	})
+})
+
 
 
 const words = [
