@@ -24,6 +24,7 @@ function load(){
 }
 function changeWord(){
 	word.innerHTML=words[Math.floor(Math.random()* words.length)];
+	word.classList.add('temp-class')
 }
 
 function inputForm(){
@@ -39,6 +40,7 @@ function inputForm(){
 		score++;
 		time=6;
 		word.innerHTML=words[Math.floor(Math.random()* words.length)];
+		word.classList.add('temp-class');
 		input.value='';
 		isplaying=true;
 		totalScore.innerHTML=score;
@@ -49,12 +51,14 @@ function inputForm(){
 function timeFunc(){
 	if(time>1&&isplaying)
 	{
+		word.classList.remove('temp-class')
 		time--;
 		timeout.innerHTML=time;
 		error.innerHTML='';
 	}
 	else if(time==1&&isplaying)
 	{
+		word.classList.remove('temp-class')
 		gameover.style.display='block';
 		clearInterval(timeFunc);
 		isplaying=false;

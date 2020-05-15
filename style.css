@@ -7,6 +7,11 @@
 body{
 	background:rgb(0,200,193);
 }
+@keyframes opacAnime{
+	from {opacity:0;}
+	to {opacity:1;}
+}
+
 header{
 	width:100%;
 	padding:12px;
@@ -95,4 +100,8 @@ table tbody tr td{
 	outline:none;
 	width:25px;
 	margin:auto;
+}
+.temp-class{
+	animation-name:opacAnime;
+	animation-duration:2s;
 }
